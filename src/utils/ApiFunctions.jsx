@@ -3,7 +3,7 @@ import axios from "axios";
 axios.defaults.maxContentLength = 50000000000000000000;
 
 export const api = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "https://fullstacksunrisehotelwebapp-production.up.railway.app/",
 });
 
 export const getHeader = () => {
