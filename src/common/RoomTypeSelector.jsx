@@ -4,12 +4,20 @@ import { getRoomTypes } from "../utils/ApiFunctions";
 const RoomTypeSelector = ({ handleRoomInputChange, newRoom }) => {
   const [roomTypes, setRoomTypes] = useState([""]);
   const [showNewRoomTypeInput, setShowNewRoomTypeInput] = useState(false);
-  const [newRoomType, setNewRoomType] = useState("");
+  const [newRoomType, setNewRoomType] = useState([]);
 
   useEffect(() => {
-    getRoomTypes().then((data) => {
-      setRoomTypes(data);
-    });
+    getRoomTypes()
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setRoomTypes(data);
+        } else {
+          console.error("Error on array from getRoomTypes, got", data);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching room types:", error);
+      });
   }, []);
 
   const handleNewRoomTypeInputChange = (e) => {
@@ -39,8 +47,7 @@ const RoomTypeSelector = ({ handleRoomInputChange, newRoom }) => {
                 handleRoomInputChange(e);
               }
             }}
-            value={newRoom.roomType}
-          >
+            value={newRoom.roomType}>
             <option value="">Select a room type</option>
             <option value={"Add New"}>Add New</option>
             {roomTypes.map((type, index) => (
@@ -62,8 +69,7 @@ const RoomTypeSelector = ({ handleRoomInputChange, newRoom }) => {
                 <button
                   className="btn btn-hotel"
                   type="button"
-                  onClick={handleAddNewRoomType}
-                >
+                  onClick={handleAddNewRoomType}>
                   Add
                 </button>
               </div>
