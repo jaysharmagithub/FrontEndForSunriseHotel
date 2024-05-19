@@ -4,20 +4,12 @@ import { getRoomTypes } from "../utils/ApiFunctions";
 const RoomTypeSelector = ({ handleRoomInputChange, newRoom }) => {
   const [roomTypes, setRoomTypes] = useState([""]);
   const [showNewRoomTypeInput, setShowNewRoomTypeInput] = useState(false);
-  const [newRoomType, setNewRoomType] = useState([]);
+  const [newRoomType, setNewRoomType] = useState("");
 
   useEffect(() => {
-    getRoomTypes()
-      .then((data) => {
-        if (Array.isArray(data)) {
-          setRoomTypes(data);
-        } else {
-          console.error("Error on array from getRoomTypes, got", data);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching room types:", error);
-      });
+    getRoomTypes().then((data) => {
+      setRoomTypes(data);
+    });
   }, []);
 
   const handleNewRoomTypeInputChange = (e) => {
@@ -34,7 +26,7 @@ const RoomTypeSelector = ({ handleRoomInputChange, newRoom }) => {
 
   return (
     <>
-      {roomTypes.length > 0 && (
+      {roomTypes.length >= 0 && (
         <div>
           <select
             required
