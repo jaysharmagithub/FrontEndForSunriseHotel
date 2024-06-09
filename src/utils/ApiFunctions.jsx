@@ -3,7 +3,7 @@ import axios from "axios";
 axios.defaults.maxContentLength = 50000000000000000000;
 
 export const api = axios.create({
-  baseURL: "https://backend-for-sunrise-hotel.vercel.app/",
+  baseURL: "https://backendforsunrisehotel.onrender.com/",
 });
 
 export const getHeader = () => {
