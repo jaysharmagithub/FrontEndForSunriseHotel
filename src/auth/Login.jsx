@@ -82,8 +82,8 @@ const Login = () => {
             Login
           </button>
           
-            <span style={{marginLeft: "10px}}>
-              Don't have an account yet?<Link to={"register"}>Register</Link>
+            <span style={{marginLeft: "10px"}}>
+              Don't have an account yet?<Link to={"/register"}>Register</Link>
             </span>
           
         </div>
